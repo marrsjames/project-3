@@ -1,7 +1,13 @@
-##Project 3
+# Project 3
 
-This is the development branch.
+Using npm as our package installer.
 
-Wohoo
+Started brainstorming the idea for our project.
 
-Anne, Antony and James
+Created a Trello board, started populating ideas onto there for features.
+
+A basic/starter backend was created, and then shared between the team.
+
+Each team member created their own branch.
+
+_By Anne, Antony, and James._

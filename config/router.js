@@ -1,9 +1,9 @@
-import express from "express";
-import doctorsController from "../controllers/doctorsController.js";
-import servicesController from "../controllers/servicesController.js";
-import patientsController from "../controllers/patientsController.js";
+import express from 'express'
+import doctorsController from '../controllers/doctorsController.js'
+import servicesController from '../controllers/servicesController.js'
+import patientsController from '../controllers/patientsController.js'
 
-const router = express.Router();
+const router = express.Router()
 
 router
   .route('/doctors')
@@ -16,8 +16,26 @@ router
   .put(doctorsController.updateDoctor)
   .delete(doctorsController.deleteDoctor)
 
-router.route("/patients").get(patientsController.getAllPatients);
+router
+  .route('/patients')
+  .get(patientsController.getAllPatients)
+  .post(patientsController.createPatient)
 
-router.route("/services").get(servicesController.getAllServices);
+router
+  .route('/patients/:id')
+  .get(patientsController.getPatient)
+  .put(patientsController.updatePatient)
+  .delete(patientsController.deletePatient)
 
-export default router;
+router
+  .route('/services')
+  .get(servicesController.getAllServices)
+  .post(servicesController.createService)
+
+router
+  .route('/services/:id')
+  .get(servicesController.getService)
+  .put(servicesController.updateService)
+  .delete(servicesController.deleteService)
+
+export default router

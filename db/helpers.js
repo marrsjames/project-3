@@ -1,24 +1,23 @@
-import mongoose from 'mongoose'
-import { dbUri } from '../config/environment.js'
+import mongoose from "mongoose";
 
 export function connectDb() {
-  return mongoose.connect(dbUri)
+  return mongoose.connect(process.env.DB_URI);
 }
 
 export function truncateDb() {
   if (mongoose.connection.readyState !== 0) {
-    const { collections } = mongoose.connection
+    const { collections } = mongoose.connection;
 
     const promises = Object.keys(collections).map((collection) =>
       mongoose.connection.collection(collection).deleteMany({})
-    )
+    );
 
-    return Promise.all(promises)
+    return Promise.all(promises);
   }
 }
 
 export function disconnectDb() {
   if (mongoose.connection.readyState !== 0) {
-    return mongoose.disconnect()
+    return mongoose.disconnect();
   }
 }

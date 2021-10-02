@@ -1,24 +1,32 @@
-import Doctor from '../models/doctor.js'
-import { doctorsSeedData } from './doctorsSeedData.js'
-import { connectDb, truncateDb, disconnectDb } from './helpers.js'
+import Doctor from "../models/doctor.js";
+import Service from "../models/service.js";
+import { doctorsSeedData } from "./doctorsSeedData.js";
+import { serviceSeedData } from "./serviceSeedData.js";
+import { connectDb, truncateDb, disconnectDb } from "./helpers.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 async function seed() {
   try {
-    await connectDb()
-    console.log('connect to database')
+    console.log("connect to database");
+    await connectDb();
 
-    await truncateDb()
-    console.log('database dropped')
+    console.log("database dropped");
+    await truncateDb();
 
-    const doctors = await Doctor.create(doctorsSeedData)
-    console.log(`${doctors.length} doctors added to the database`)
+    const doctors = await Doctor.create(doctorsSeedData);
+    console.log(`${doctors.length} doctors added to the database`);
 
-    console.log('goodbye')
+    const services = await Service.create(serviceSeedData);
+    console.log(`${services.length} services added to the database`);
+
+    console.log("goodbye");
   } catch (err) {
-    console.log('something went wrong with the database', err)
+    console.log("something went wrong with the database", err);
   }
 
-  disconnectDb()
+  disconnectDb();
 }
 
-seed()
+seed();

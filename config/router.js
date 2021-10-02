@@ -1,8 +1,11 @@
-import express from 'express'
-import doctorsController from '../controllers/doctorsController.js'
+import express from "express";
+import doctorsController from "../controllers/doctorsController.js";
+import servicesController from "../controllers/servicesController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.route('/doctors').get(doctorsController.getAllDoctors)
+router.route("/doctors").get(doctorsController.getAllDoctors);
 
-export default router
+router.route("/services").get(servicesController.getAllServices);
+
+export default router;

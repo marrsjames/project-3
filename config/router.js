@@ -1,7 +1,9 @@
-import express from 'express'
-import doctorsController from '../controllers/doctorsController.js'
+import express from "express";
+import doctorsController from "../controllers/doctorsController.js";
+import patientsController from "../controllers/patientsController.js";
 
-const router = express.Router()
+const router = express.Router();
+
 
 router
   .route('/doctors')
@@ -14,4 +16,6 @@ router
   .put(doctorsController.updateDoctor)
   .delete(doctorsController.deleteDoctor)
 
-export default router
+router.route("/patients").get(patientsController.getAllPatients);
+
+export default router;

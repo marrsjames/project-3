@@ -5,6 +5,7 @@ const doctorSchema = new mongoose.Schema({
   name: String,
   bio: String,
   services: [{ type: mongoose.Types.ObjectId, ref: 'Service' }],
+  appointments: [{ type: mongoose.Types.ObjectId, ref: 'Appointment' }],
 })
 
 doctorSchema.plugin(mongooseUniqueValidator)

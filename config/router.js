@@ -1,21 +1,22 @@
-import express from "express";
-import doctorsController from "../controllers/doctorsController.js";
-import servicesController from "../controllers/servicesController.js";
-import patientsController from "../controllers/patientsController.js";
-import userController from "../controllers/userController.js";
+import express from 'express'
+import doctorsController from '../controllers/doctorsController.js'
+import servicesController from '../controllers/servicesController.js'
+import patientsController from '../controllers/patientsController.js'
+import userController from '../controllers/userController.js'
+import appointmentsController from '../controllers/appointmentsController.js'
 
 const router = express.Router()
 
 router
-  .route("/doctors")
+  .route('/doctors')
   .get(doctorsController.getAllDoctors)
-  .post(doctorsController.createDoctor);
+  .post(doctorsController.createDoctor)
 
 router
-  .route("/doctors/:id")
+  .route('/doctors/:id')
   .get(doctorsController.getDoctor)
   .put(doctorsController.updateDoctor)
-  .delete(doctorsController.deleteDoctor);
+  .delete(doctorsController.deleteDoctor)
 
 router
   .route('/patients')
@@ -39,9 +40,13 @@ router
   .put(servicesController.updateService)
   .delete(servicesController.deleteService)
 
-router.route("/admin/users").get(userController.getAllUsers);
-router.route("/admin/promote").get(userController.promoteUser);
-router.route("/admin/demote").get(userController.demoteUser);
+router
+  .route('/appointments')
+  .get(appointmentsController.getAllAppointments)
+  .post(appointmentsController.createAppointment)
 
-export default router;
+router.route('/admin/users').get(userController.getAllUsers)
+router.route('/admin/promote').get(userController.promoteUser)
+router.route('/admin/demote').get(userController.demoteUser)
 
+export default router

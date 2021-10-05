@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 
-import User from "../models/user.js";
+
+import User from '../models/user.js'
+
 
 // ! Added a new controller function to create a user
 async function registerUser(req, res, next) {
@@ -75,8 +77,9 @@ async function loginUser(req, res, next) {
     const token = jwt.sign(
       { userId: user._id }, // ? PAYLOAD: information we're storing on the token
       process.env.SECRET, // ? A secret string only we know
-      { expiresIn: "12h" } // ? The token will expire in 12 hours.
-    );
+      { expiresIn: '12h' } // ? The token will expire in 12 hours.
+    )
+
     // ! 202 -> Accepted
     res.status(202).send({ token, message: "Login successful!" });
   } catch (err) {
@@ -90,4 +93,4 @@ export default {
   // promoteUser,
   // demoteUser,
   getAllUsers,
-};
+}

@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import mongooseUniqueValidator from "mongoose-unique-validator";
+import mongoose from 'mongoose'
+import mongooseUniqueValidator from 'mongoose-unique-validator'
 
 const patientSchema = new mongoose.Schema({
   name: String,
@@ -7,10 +7,11 @@ const patientSchema = new mongoose.Schema({
   NHSNumber: String,
   Age: Number,
   HealthConditions: String,
-});
+  appointments: [{ type: mongoose.Types.ObjectId, ref: 'Appointment' }],
+})
 
-patientSchema.plugin(mongooseUniqueValidator);
+patientSchema.plugin(mongooseUniqueValidator)
 
-const Patient = mongoose.model("Patient", patientSchema);
+const Patient = mongoose.model('Patient', patientSchema)
 
-export default Patient;
+export default Patient

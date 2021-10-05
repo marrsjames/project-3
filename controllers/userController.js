@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 
 import User from '../models/user.js'
-import { secret } from '../config/environment.js'
 
 // ! Added a new controller function to create a user
 async function registerUser(req, res, next) {
@@ -75,7 +74,7 @@ async function loginUser(req, res, next) {
     // ? as have expiry times on your sessions
     const token = jwt.sign(
       { userId: user._id }, // ? PAYLOAD: information we're storing on the token
-      secret, // ? A secret string only we know
+      process.env.SECRET, // ? A secret string only we know
       { expiresIn: '12h' } // ? The token will expire in 12 hours.
     )
     // ! 202 -> Accepted

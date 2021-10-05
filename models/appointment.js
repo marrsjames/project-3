@@ -3,9 +3,9 @@ import mongooseUniqueValidator from 'mongoose-unique-validator'
 
 const appointmentSchema = new mongoose.Schema({
   date: Date,
-  service: [{ type: mongoose.Types.ObjectId, ref: 'Service' }],
-  doctor: [{ type: mongoose.Types.ObjectId, ref: 'Doctor' }],
-  patient: [{ type: mongoose.Types.ObjectId, ref: 'Patient' }],
+  service: [{ type: mongoose.Schema.ObjectId, ref: 'Service', name: 'string' }],
+  doctor: [{ type: mongoose.Schema.ObjectId, ref: 'Doctor', name: 'string' }],
+  patient: [{ type: mongoose.Schema.ObjectId, ref: 'Patient', name: 'string' }],
 })
 
 appointmentSchema.plugin(mongooseUniqueValidator)

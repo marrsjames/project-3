@@ -7,7 +7,7 @@ const patientSchema = new mongoose.Schema({
   NHSNumber: String,
   Age: Number,
   HealthConditions: String,
-  appointments: [{ type: mongoose.Types.ObjectId, ref: 'Appointment' }],
+  appointments: [{ type: mongoose.Schema.ObjectId, ref: 'Appointment' }],
 })
 
 patientSchema.plugin(mongooseUniqueValidator)

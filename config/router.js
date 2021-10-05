@@ -5,40 +5,46 @@ import patientsController from '../controllers/patientsController.js'
 import userController from '../controllers/userController.js'
 import appointmentsController from '../controllers/appointmentsController.js'
 
-const router = express.Router()
+import secureRoute from "../middleware/secureRoute.js";
+
+const router = express.Router();
 
 router
   .route('/doctors')
   .get(doctorsController.getAllDoctors)
-  .post(doctorsController.createDoctor)
+  .post(secureRoute, doctorsController.createDoctor);
 
 router
   .route('/doctors/:id')
   .get(doctorsController.getDoctor)
-  .put(doctorsController.updateDoctor)
-  .delete(doctorsController.deleteDoctor)
+  .put(secureRoute, doctorsController.updateDoctor)
+  .delete(secureRoute, doctorsController.deleteDoctor);
 
 router
-  .route('/patients')
-  .get(patientsController.getAllPatients)
-  .post(patientsController.createPatient)
+  .route("/patients")
+  .get(secureRoute, patientsController.getAllPatients) // this needs to be secure, but also should be specific to user. Patient shouldn't be able to see other patients.
+  .post(secureRoute, patientsController.createPatient);
 
 router
-  .route('/patients/:id')
+  .route("/patients/:id")
   .get(patientsController.getPatient)
-  .put(patientsController.updatePatient)
-  .delete(patientsController.deletePatient)
+  .put(secureRoute, patientsController.updatePatient)
+  .delete(secureRoute, patientsController.deletePatient);
 
 router
-  .route('/services')
+  .route("/services")
   .get(servicesController.getAllServices)
-  .post(servicesController.createService)
+  .post(secureRoute, servicesController.createService);
 
 router
-  .route('/services/:id')
+  .route("/services/:id")
   .get(servicesController.getService)
-  .put(servicesController.updateService)
-  .delete(servicesController.deleteService)
+  .put(secureRoute, servicesController.updateService)
+  .delete(secureRoute, servicesController.deleteService);
+
+router.route("/register").post(userController.registerUser);
+
+router.route("/login").post(userController.loginUser);
 
 router
   .route('/appointments')

@@ -6,6 +6,7 @@ const Register = () => {
   const history = useHistory();
   const [state, setState] = React.useState({
     formData: {
+      username: "",
       email: "",
       password: "",
       passwordConfirmation: "",
@@ -32,6 +33,8 @@ const Register = () => {
       [e.target.name]: e.target.value,
     };
 
+    console.log("Testing for formdata", state.formData.email);
+
     setState({ formData });
   };
 
@@ -40,12 +43,23 @@ const Register = () => {
       <h1>Register</h1>
       <div id="registration-form">
         <form onSubmit={handleSubmit}>
+          <div id="username">
+            <label>Username</label>
+            <input
+              placeholder="Username"
+              name={"username"}
+              type="text"
+              value={state.formData.username}
+              onChange={handleChange}
+            />
+          </div>
+
           <div id="email">
             <label>Email</label>
             <input
-              className="input"
               placeholder="Email"
-              name="email"
+              name={"email"}
+              type="email"
               value={state.formData.email}
               onChange={handleChange}
             />
@@ -54,9 +68,8 @@ const Register = () => {
           <div id="password">
             <label>Password</label>
             <input
-              className="input"
               placeholder="Password"
-              name="password"
+              name={"password"}
               type="password"
               value={state.formData.password}
               onChange={handleChange}
@@ -66,9 +79,8 @@ const Register = () => {
           <div id="confirmPassword">
             <label>Confirm Password</label>
             <input
-              className="input"
               placeholder="Confirm password"
-              name="passwordConfirmation"
+              name={"passwordConfirmation"}
               type="password"
               value={state.formData.passwordConfirmation}
               onChange={handleChange}

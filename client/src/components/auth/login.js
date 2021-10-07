@@ -17,10 +17,10 @@ const Login = () => {
 
     try {
       const res = await loginUser(state.formData);
-      if (res.status === 200) {
+      if ((res.status === 200) | (res.status === 202)) {
         setToken(res.data.token);
-        callback();
-        history.push("/login");
+        // callback();
+        history.push("/home");
       }
     } catch (err) {
       console.error("Error logging in user", err);
@@ -46,7 +46,7 @@ const Login = () => {
             <input
               className="input"
               placeholder="Email"
-              name="email"
+              name={"email"}
               value={state.formData.email}
               onChange={handleChange}
             />

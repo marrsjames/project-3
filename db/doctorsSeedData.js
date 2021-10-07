@@ -1,11 +1,20 @@
 export const doctorsSeedData = [
   {
-    name: 'Doctor James',
+    name: "Doctor James",
+    bio: "James graduated from London Medical School and .....",
+    services: [],
+    appointments: [],
   },
   {
-    name: 'Doctors Anne',
+    name: "Doctor Anne",
+    bio: "Anne graduated from London Medical School and .....",
+    services: [],
+    appointments: [],
   },
   {
-    name: 'Doctor Antony',
+    name: "Doctor Antony",
+    bio: "Antony graduated from London Medical School and .....",
+    services: [],
+    appointments: [],
   },
-]
+];

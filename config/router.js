@@ -5,18 +5,25 @@ import patientsController from '../controllers/patientsController.js'
 import userController from '../controllers/userController.js'
 import appointmentsController from '../controllers/appointmentsController.js'
 
-import secureRoute from '../middleware/secureRoute.js'
+//import secureRoute from "../middleware/secureRoute.js";
 
 const router = express.Router()
 
 router
   .route('/doctors')
   .get(doctorsController.getAllDoctors)
-  .post(secureRoute, doctorsController.createDoctor)
+  .post(doctorsController.createDoctor);
 
 router
   .route('/doctors/:id')
   .get(doctorsController.getDoctor)
+  .put(doctorsController.updateDoctor)
+  .delete(doctorsController.deleteDoctor);
+
+router
+  .route("/patients")
+  .get(patientsController.getAllPatients) // this needs to be secure, but also should be specific to user. Patient shouldn't be able to see other patients.
+  .post(patientsController.createPatient);
   .put(secureRoute, doctorsController.updateDoctor)
   .delete(secureRoute, doctorsController.deleteDoctor)
 
@@ -26,22 +33,24 @@ router
   .get(patientsController.getAllPatients) //unsecure temporarily wile working
   .post(secureRoute, patientsController.createPatient)
 
+
 router
   .route('/patients/:id')
   .get(patientsController.getPatient)
-  .put(secureRoute, patientsController.updatePatient)
-  .delete(secureRoute, patientsController.deletePatient)
+  .put(patientsController.updatePatient)
+  .delete(patientsController.deletePatient);
 
 router
   .route('/services')
   .get(servicesController.getAllServices)
-  .post(secureRoute, servicesController.createService)
+  .post(servicesController.createService);
+
 
 router
   .route('/services/:id')
   .get(servicesController.getService)
-  .put(secureRoute, servicesController.updateService)
-  .delete(secureRoute, servicesController.deleteService)
+  .put(servicesController.updateService)
+  .delete(servicesController.deleteService);
 
 router.route('/register').post(userController.registerUser)
 

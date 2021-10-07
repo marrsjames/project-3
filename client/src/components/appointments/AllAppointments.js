@@ -20,6 +20,7 @@ const AllAppointments = () => {
           <h2>Doctor: {appointment.doctor.map((doc) => doc.name)}</h2>
           <h2>Service: {appointment.service.map((ser) => ser.name)}</h2>
           <h2>Patient: {appointment.patient.map((pat) => pat.name)}</h2>
+          <hr />
         </div>
       ))}
     </>

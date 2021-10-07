@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
-import Appointment from '../../../../models/appointment'
+//import Appointment from '../../../../models/appointment'
 import { createAppointment } from '../../api/AppointmentsApi.js'
 import { getAllDoctors } from '../../api/DoctorsApi.js'
 import { getAllPatients } from '../../api/PatientsApi.js'
@@ -83,7 +83,6 @@ const AppointmentNew = () => {
               ))}
             </select>
             <select
-              defaultValue={services[0].id}
               name='service'
               value={state.formData.service}
               onChange={handleChange}

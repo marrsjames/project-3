@@ -1,14 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { registerUser } from "../../api/auth.js";
+import { loginUser } from "../../api/auth.js";
+import { setToken } from "../../api/token.js";
 
-const Register = () => {
+const Login = () => {
   const history = useHistory();
   const [state, setState] = React.useState({
     formData: {
       email: "",
       password: "",
-      passwordConfirmation: "",
     },
   });
 
@@ -16,13 +16,14 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await registerUser(state.formData);
-      console.log(res.status);
+      const res = await loginUser(state.formData);
       if (res.status === 200) {
+        setToken(res.data.token);
+        callback();
         history.push("/login");
       }
     } catch (err) {
-      console.error("Error registering user", err.res.data);
+      console.error("Error logging in user", err);
     }
   };
 
@@ -37,8 +38,8 @@ const Register = () => {
 
   return (
     <>
-      <h1>Register</h1>
-      <div id="registration-form">
+      <h1>Login</h1>
+      <div id="login-form">
         <form onSubmit={handleSubmit}>
           <div id="email">
             <label>Email</label>
@@ -63,20 +64,8 @@ const Register = () => {
             />
           </div>
 
-          <div id="confirmPassword">
-            <label>Confirm Password</label>
-            <input
-              className="input"
-              placeholder="Confirm password"
-              name="passwordConfirmation"
-              type="password"
-              value={state.formData.passwordConfirmation}
-              onChange={handleChange}
-            />
-          </div>
-
           <div id="submit-button">
-            <input type="submit" value="Register" />
+            <input type="submit" value="Login" />
           </div>
         </form>
       </div>
@@ -84,4 +73,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

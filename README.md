@@ -14,4 +14,8 @@ Started building the models, db, controllers, and seed files.
 
 Started working on authentication. Creating secure routes that are only valid for registered patients/users/specific people
 
+Started building the frontend stuff. Created the clientfolder, etc.
+
+- Need to rememmber to remove .env files from repo when near the end
+
 _By Anne, Antony, and James._

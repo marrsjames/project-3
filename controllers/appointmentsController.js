@@ -6,6 +6,9 @@ import Service from '../models/service.js'
 async function getAllAppointments(_req, res, next) {
   try {
     const appointments = await Appointment.find()
+      .populate('service')
+      .populate('doctor')
+      .populate('patient')
     return res.status(200).json(appointments)
   } catch (err) {
     next(err)

@@ -7,7 +7,7 @@ const Login = () => {
   const history = useHistory();
   const [state, setState] = React.useState({
     formData: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -41,13 +41,12 @@ const Login = () => {
       <h1>Login</h1>
       <div id="login-form">
         <form onSubmit={handleSubmit}>
-          <div id="email">
-            <label>Email</label>
+          <div id="username">
+            <label>Username</label>
             <input
-              className="input"
-              placeholder="Email"
-              name={"email"}
-              value={state.formData.email}
+              placeholder="Username"
+              name={"username"}
+              value={state.formData.username}
               onChange={handleChange}
             />
           </div>
@@ -55,7 +54,6 @@ const Login = () => {
           <div id="password">
             <label>Password</label>
             <input
-              className="input"
               placeholder="Password"
               name="password"
               type="password"

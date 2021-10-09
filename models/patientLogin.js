@@ -3,31 +3,33 @@ import bcrypt from "bcrypt";
 import mongooseHidden from "mongoose-hidden";
 import uniqueValidator from "mongoose-unique-validator";
 
-// the user will be an admin user
-
-const user = new mongoose.Schema({
+const patientLogin = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
+  firstName: { type: String, required: true },
+  surname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  isAdmin: { type: Boolean, isAdmin: true },
+  dateOfBirth: { type: Date, required: true },
+  gender: { type: String, required: true },
+  isAdmin: { type: Boolean, isAdmin: false },
 });
 
-user.pre("save", function (next) {
+patientLogin.pre("save", function (next) {
   this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync());
   next();
 });
 
-user.methods.validatePassword = function (password) {
+patientLogin.methods.validatePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-user.plugin(uniqueValidator);
+patientLogin.plugin(uniqueValidator);
 
-user.plugin(
+patientLogin.plugin(
   mongooseHidden({
     defaultHidden: { password: true, email: true },
   })
 );
 
-const User = mongoose.model("User", user);
-export default User;
+const PatientLogin = mongoose.model("PatientLogin", patientLogin);
+export default PatientLogin;

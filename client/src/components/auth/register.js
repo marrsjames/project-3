@@ -38,8 +38,6 @@ const Register = () => {
       [e.target.name]: e.target.value,
     };
 
-    console.log("Testing for formdata", state.formData.email);
-
     setState({ formData });
   };
 

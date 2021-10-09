@@ -16,6 +16,12 @@ const NavBar = () => {
         </span>
         <span>Our Story</span>
       </Link>
+      <Link to="/coronavirus" className="navbar-item">
+        <span class="icon">
+          <i class="fas fa-viruses"></i>
+        </span>
+        <span>Coronavirus</span>
+      </Link>
       <Link to="/doctors" className="navbar-item">
         <span class="icon">
           <i class="fas fa-user-md"></i>

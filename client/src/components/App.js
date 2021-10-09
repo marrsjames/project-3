@@ -9,6 +9,7 @@ import "../styles/styles.scss";
 import AllDoctors from "./doctors/AllDoctors.js";
 import NavBar from "./common/NavBar.js";
 import About from "../components/common/About.js";
+import Covid from "./coronavirus/covid.js";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
+        <Route path="/coronavirus" component={Covid} />
         <Route path="/doctors" component={AllDoctors} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />

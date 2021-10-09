@@ -20,7 +20,7 @@ const Login = () => {
       if ((res.status === 200) | (res.status === 202)) {
         setToken(res.data.token);
         // callback();
-        history.push("/home");
+        history.push("/appointments");
       }
     } catch (err) {
       console.error("Error logging in user", err);

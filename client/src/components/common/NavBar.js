@@ -7,6 +7,12 @@ const NavBar = () => {
       <Link to='/' className='navbar-item'>
         Home
       </Link>
+      <Link to='/login' className='navbar-item'>
+        Login
+      </Link>
+      <Link to='/register' className='navbar-item'>
+        Register
+      </Link>
       <Link to='/doctors' className='navbar-item'>
         View doctors
       </Link>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 //import Appointment from '../../../../models/appointment'
 import { createAppointment } from '../../api/AppointmentsApi.js'
-import { getAllDoctors } from '../../api/DoctorsApi.js'
+import { getAllDoctors } from '../../api/doctors.js'
 import { getAllPatients } from '../../api/PatientsApi.js'
 import { getAllServices } from '../../api/ServicesApi.js'
 import DatePicker from 'react-datepicker'
@@ -10,7 +10,7 @@ import setHours from 'date-fns/setHours'
 import setMinutes from 'date-fns/setMinutes'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const AppointmentNew = () => {
+const AppointmentNew = ({ pushAppointment }) => {
   const history = useHistory()
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 30), 16)
@@ -18,14 +18,6 @@ const AppointmentNew = () => {
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
   const [services, setServices] = useState([])
-  const [state, setState] = useState({
-    formData: {
-      date: startDate,
-      service: '',
-      doctor: '',
-      patient: '',
-    },
-  })
 
   useEffect(() => {
     getAllDoctors().then((doctors) => setDoctors(doctors))
@@ -37,13 +29,24 @@ const AppointmentNew = () => {
     getAllServices().then((services) => setServices(services))
   }, [])
 
+  const [state, setState] = useState({
+    formData: {
+      date: startDate,
+      service: '',
+      doctor: '',
+      patient: '',
+    },
+  })
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      console.log(state.formData)
-      const result = createAppointment(state.formData)
-      console.log(result)
+      //      console.log(state.formData)
+      const result = await createAppointment(state.formData)
+      console.log('result is ', result.data.doctor)
+      console.log(doctors)
+      pushAppointment(result.data)
       history.push('/appointments')
     } catch (err) {
       console.log('error creating appointment', err)
@@ -62,6 +65,7 @@ const AppointmentNew = () => {
       [name]: value,
     }
     setState({ formData })
+    console.log({ formData })
   }
 
   return (

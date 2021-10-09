@@ -4,7 +4,7 @@ export function connectDb() {
   return mongoose.connect(process.env.DB_URI);
 }
 
-export function truncateDb() {
+export function dropDb() {
   if (mongoose.connection.readyState !== 0) {
     const { collections } = mongoose.connection;
 

@@ -5,15 +5,22 @@ import { createAppointment } from '../../api/AppointmentsApi.js'
 import { getAllDoctors } from '../../api/DoctorsApi.js'
 import { getAllPatients } from '../../api/PatientsApi.js'
 import { getAllServices } from '../../api/ServicesApi.js'
+import DatePicker from 'react-datepicker'
+import setHours from 'date-fns/setHours'
+import setMinutes from 'date-fns/setMinutes'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const AppointmentNew = () => {
   const history = useHistory()
+  const [startDate, setStartDate] = useState(
+    setHours(setMinutes(new Date(), 30), 16)
+  )
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
   const [services, setServices] = useState([])
   const [state, setState] = useState({
     formData: {
-      date: '',
+      date: startDate,
       service: '',
       doctor: '',
       patient: '',
@@ -44,12 +51,14 @@ const AppointmentNew = () => {
   }
 
   const handleChange = (e) => {
+    console.log(startDate)
     const target = e.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
 
     const formData = {
       ...state.formData,
+      date: startDate,
       [name]: value,
     }
     setState({ formData })
@@ -62,15 +71,28 @@ const AppointmentNew = () => {
           <form onSubmit={handleSubmit}>
             <div>
               <label>Description</label>
-              <div>
+              {/* <div>
                 <textarea
                   placeholder='Type in date'
                   name='date'
                   value={state.formData.date}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
             </div>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              showTimeSelect
+              dateFormat='Pp'
+              excludeTimes={[
+                setHours(setMinutes(new Date(), 0), 17),
+                setHours(setMinutes(new Date(), 30), 18),
+                setHours(setMinutes(new Date(), 30), 19),
+                setHours(setMinutes(new Date(), 30), 17),
+              ]}
+            />
+
             <select
               name='doctor'
               value={state.formData.doctor}

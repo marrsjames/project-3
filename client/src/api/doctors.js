@@ -6,7 +6,7 @@ export const getAllDoctors = async () => {
   return data;
 };
 export const getDoctor = async (id) => {
-  const options = { method: "GET", url: "/api/doctors/${id}" };
+  const options = { method: "GET", url: `/api/doctors/${id}` };
   const { data } = await axios.request(options);
   return data;
 };

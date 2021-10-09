@@ -8,8 +8,11 @@ const Register = () => {
     formData: {
       username: "",
       email: "",
+      firstName: "",
+      surname: "",
       password: "",
-      passwordConfirmation: "",
+      dateOfBirth: "",
+      gender: "",
     },
   });
 
@@ -19,12 +22,14 @@ const Register = () => {
     try {
       const res = await registerUser(state.formData);
       console.log(res.status);
-      if (res.status === 200) {
+      if (res.status === 201) {
         history.push("/login");
       }
     } catch (err) {
-      console.error("Error registering user", err.res.data);
+      console.error("Error registering user", err.res);
     }
+
+    alert("Thank you for registering. We will get back to you shortly!");
   };
 
   const handleChange = (e) => {
@@ -33,19 +38,18 @@ const Register = () => {
       [e.target.name]: e.target.value,
     };
 
-    console.log("Testing for formdata", state.formData.email);
-
     setState({ formData });
   };
 
   return (
-    <>
-      <h1>Register</h1>
+    <div class="section">
+      <h1 className="title has-text-centered">Registration Form</h1>
       <div id="registration-form">
         <form onSubmit={handleSubmit}>
-          <div id="username">
-            <label>Username</label>
+          <div class="field">
+            <label class="label">Username</label>
             <input
+              class="input"
               placeholder="Username"
               name={"username"}
               type="text"
@@ -54,10 +58,11 @@ const Register = () => {
             />
           </div>
 
-          <div id="email">
-            <label>Email</label>
+          <div class="field">
+            <label class="label">Email</label>
             <input
-              placeholder="Email"
+              class="input"
+              placeholder="e.g. johndoe@seisurgery.com"
               name={"email"}
               type="email"
               value={state.formData.email}
@@ -65,9 +70,10 @@ const Register = () => {
             />
           </div>
 
-          <div id="password">
-            <label>Password</label>
+          <div class="field">
+            <label class="label">Password</label>
             <input
+              class="input"
               placeholder="Password"
               name={"password"}
               type="password"
@@ -76,9 +82,10 @@ const Register = () => {
             />
           </div>
 
-          <div id="confirmPassword">
-            <label>Confirm Password</label>
+          <div class="field">
+            <label class="label">Confirm Password</label>
             <input
+              class="input"
               placeholder="Confirm password"
               name={"passwordConfirmation"}
               type="password"
@@ -87,12 +94,73 @@ const Register = () => {
             />
           </div>
 
+          <div class="field">
+            <label class="label">First Name</label>
+            <input
+              class="input"
+              placeholder="e.g. John"
+              name={"firstName"}
+              type="text"
+              value={state.formData.firstName}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div class="field">
+            <label class="label">Surname</label>
+            <input
+              class="input"
+              placeholder="e.g. Doe"
+              name={"surname"}
+              type="text"
+              value={state.formData.surname}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div class="field">
+            <label class="label">Date of Birth</label>
+            <input
+              class="input"
+              name={"dateOfBirth"}
+              type="date"
+              value={state.formData.dateOfBirth}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div class="field">
+            <label class="label">Sex</label>
+            {/* <input
+              class="input"
+              placeholder="Gender"
+              name={"gender"}
+              type="text"
+              value={state.formData.gender}
+              onChange={handleChange}
+            /> */}
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option value={state.formData.gender}>Select</option>
+                  <option value={state.formData.gender}>Male</option>
+                  <option value={state.formData.gender}>Female</option>
+                  <option value={state.formData.gender}>Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           <div id="submit-button">
-            <input type="submit" value="Register" />
+            <input
+              class="button is-large is-danger"
+              type="submit"
+              value="Register"
+            />
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

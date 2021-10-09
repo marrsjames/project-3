@@ -18,13 +18,7 @@ const NavBar = () => {
       <Link to='/doctors' className='navbar-item'>
         View doctors
       </Link>
-      <Link to='/appointments' className='navbar-item'>
-        Appointments
-      </Link>
-      <Link to='/newappointment' className='navbar-item'>
-        New Appointment
-      </Link>
-      <Dropdown trigger='Appointments' className='navbar-item'>
+      <Dropdown trigger='Appointments'>
         <Link to='/appointments' className='dropdown-item'>
           All Appointments
         </Link>

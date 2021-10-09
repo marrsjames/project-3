@@ -12,26 +12,33 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const AppointmentNew = ({ pushAppointment }) => {
   const history = useHistory()
-  const [startDate, setStartDate] = useState(
-    setHours(setMinutes(new Date(), 30), 16)
-  )
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
   const [services, setServices] = useState([])
 
   useEffect(() => {
-    getAllDoctors().then((doctors) => setDoctors(doctors))
+    getAllDoctors().then((doctors) => {
+      setDoctors(doctors)
+    })
+    getAllPatients().then((patients) => {
+      setPatients(patients)
+    })
+    getAllServices().then((services) => {
+      setServices(services)
+    })
   }, [])
+
   useEffect(() => {
-    getAllPatients().then((patients) => setPatients(patients))
-  }, [])
-  useEffect(() => {
-    getAllServices().then((services) => setServices(services))
-  }, [])
+    appendFormData({
+      service: services[0]?._id,
+      doctor: doctors[0]?._id,
+      patient: patients[0]?._id,
+    })
+  }, [doctors, patients, services])
 
   const [state, setState] = useState({
     formData: {
-      date: startDate,
+      date: setHours(setMinutes(new Date(), 30), 16),
       service: '',
       doctor: '',
       patient: '',
@@ -42,10 +49,11 @@ const AppointmentNew = ({ pushAppointment }) => {
     e.preventDefault()
 
     try {
-      //      console.log(state.formData)
+      console.log('state.formData', state.formData)
       const result = await createAppointment(state.formData)
-      console.log('result is ', result.data.doctor)
-      console.log(doctors)
+      console.log('result is ', result.data)
+      // console.log(state.formData)
+      //console.log('result.data', result.data)
       pushAppointment(result.data)
       history.push('/appointments')
     } catch (err) {
@@ -53,19 +61,26 @@ const AppointmentNew = ({ pushAppointment }) => {
     }
   }
 
-  const handleChange = (e) => {
-    console.log(startDate)
-    const target = e.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
-
+  const updateFormData = (name, value) => {
     const formData = {
       ...state.formData,
-      date: startDate,
       [name]: value,
     }
-    setState({ formData })
     console.log({ formData })
+    setState({ formData })
+  }
+
+  const appendFormData = (newFormData) => {
+    const formData = {
+      ...state.formData,
+      ...newFormData,
+    }
+    console.log({ formData })
+    setState({ formData })
+  }
+
+  const handleChange = (e) => {
+    updateFormData(e.target.name, e.target.value)
   }
 
   return (
@@ -85,8 +100,9 @@ const AppointmentNew = ({ pushAppointment }) => {
               </div> */}
             </div>
             <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={state.formData.date}
+              onChange={(date) => updateFormData('date', date)}
+              // onChange={handleChange}
               showTimeSelect
               dateFormat='Pp'
               excludeTimes={[

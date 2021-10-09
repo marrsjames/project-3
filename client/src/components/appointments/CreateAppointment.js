@@ -1,68 +1,87 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router'
 //import Appointment from '../../../../models/appointment'
-import { createAppointment } from "../../api/AppointmentsApi.js";
-import { getAllDoctors } from "../../api/doctors.js";
-import { getAllPatients } from "../../api/PatientsApi.js";
-import { getAllServices } from "../../api/ServicesApi.js";
-import DatePicker from "react-datepicker";
-import setHours from "date-fns/setHours";
-import setMinutes from "date-fns/setMinutes";
-import "react-datepicker/dist/react-datepicker.css";
+import { createAppointment } from '../../api/AppointmentsApi.js'
+import { getAllDoctors } from '../../api/doctors.js'
+import { getAllPatients } from '../../api/PatientsApi.js'
+import { getAllServices } from '../../api/ServicesApi.js'
+import DatePicker from 'react-datepicker'
+import setHours from 'date-fns/setHours'
+import setMinutes from 'date-fns/setMinutes'
+import 'react-datepicker/dist/react-datepicker.css'
 
-const AppointmentNew = () => {
-  const history = useHistory();
-  const [startDate, setStartDate] = useState(
-    setHours(setMinutes(new Date(), 30), 16)
-  );
-  const [doctors, setDoctors] = useState([]);
-  const [patients, setPatients] = useState([]);
-  const [services, setServices] = useState([]);
+const AppointmentNew = ({ pushAppointment }) => {
+  const history = useHistory()
+  const [doctors, setDoctors] = useState([])
+  const [patients, setPatients] = useState([])
+  const [services, setServices] = useState([])
+
+  useEffect(() => {
+    getAllDoctors().then((doctors) => {
+      setDoctors(doctors)
+    })
+    getAllPatients().then((patients) => {
+      setPatients(patients)
+    })
+    getAllServices().then((services) => {
+      setServices(services)
+    })
+  }, [])
+
+  useEffect(() => {
+    appendFormData({
+      service: services[0]?._id,
+      doctor: doctors[0]?._id,
+      patient: patients[0]?._id,
+    })
+  }, [doctors, patients, services])
+
   const [state, setState] = useState({
     formData: {
-      date: startDate,
-      service: "",
-      doctor: "",
-      patient: "",
+      date: setHours(setMinutes(new Date(), 30), 16),
+      service: '',
+      doctor: '',
+      patient: '',
     },
-  });
-
-  useEffect(() => {
-    getAllDoctors().then((doctors) => setDoctors(doctors));
-  }, []);
-  useEffect(() => {
-    getAllPatients().then((patients) => setPatients(patients));
-  }, []);
-  useEffect(() => {
-    getAllServices().then((services) => setServices(services));
-  }, []);
+  })
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      console.log(state.formData);
-      const result = createAppointment(state.formData);
-      console.log(result);
-      history.push("/appointments");
+      console.log('state.formData', state.formData)
+      const result = await createAppointment(state.formData)
+      console.log('result is ', result.data)
+      // console.log(state.formData)
+      //console.log('result.data', result.data)
+      pushAppointment(result.data)
+      history.push('/appointments')
     } catch (err) {
-      console.log("error creating appointment", err);
+      console.log('error creating appointment', err)
     }
-  };
+  }
 
-  const handleChange = (e) => {
-    console.log(startDate);
-    const target = e.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
+  const updateFormData = (name, value) => {
     const formData = {
       ...state.formData,
-      date: startDate,
       [name]: value,
-    };
-    setState({ formData });
-  };
+    }
+    console.log({ formData })
+    setState({ formData })
+  }
+
+  const appendFormData = (newFormData) => {
+    const formData = {
+      ...state.formData,
+      ...newFormData,
+    }
+    console.log({ formData })
+    setState({ formData })
+  }
+
+  const handleChange = (e) => {
+    updateFormData(e.target.name, e.target.value)
+  }
 
   return (
     <section>
@@ -81,10 +100,11 @@ const AppointmentNew = () => {
               </div> */}
             </div>
             <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={state.formData.date}
+              onChange={(date) => updateFormData('date', date)}
+              // onChange={handleChange}
               showTimeSelect
-              dateFormat="Pp"
+              dateFormat='Pp'
               excludeTimes={[
                 setHours(setMinutes(new Date(), 0), 17),
                 setHours(setMinutes(new Date(), 30), 18),
@@ -94,7 +114,7 @@ const AppointmentNew = () => {
             />
 
             <select
-              name="doctor"
+              name='doctor'
               value={state.formData.doctor}
               onChange={handleChange}
             >
@@ -105,7 +125,7 @@ const AppointmentNew = () => {
               ))}
             </select>
             <select
-              name="service"
+              name='service'
               value={state.formData.service}
               onChange={handleChange}
             >
@@ -116,7 +136,7 @@ const AppointmentNew = () => {
               ))}
             </select>
             <select
-              name="patient"
+              name='patient'
               value={state.formData.patient}
               onChange={handleChange}
             >
@@ -127,13 +147,13 @@ const AppointmentNew = () => {
               ))}
             </select>
             <div>
-              <input type="submit" value="Create appointment" />
+              <input type='submit' value='Create appointment' />
             </div>
           </form>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AppointmentNew;
+export default AppointmentNew

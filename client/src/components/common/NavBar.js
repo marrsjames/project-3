@@ -1,5 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import Dropdown from 'react-bulma-dropdown'
+import 'react-bulma-dropdown/dist/main.css'
 
 const NavBar = () => {
   return (
@@ -28,6 +30,14 @@ const NavBar = () => {
         </span>
         <span>View Doctors</span>
       </Link>
+      <Dropdown trigger='Appointments'>
+        <Link to='/appointments' className='dropdown-item'>
+          All Appointments
+        </Link>
+        <Link to='/newappointment' className='dropdown-item'>
+          New Appointment
+        </Link>
+      </Dropdown>
       <Link to="/appointments" className="navbar-item">
         <span class="icon">
           <i class="fas fa-calendar-check"></i>

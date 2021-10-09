@@ -38,7 +38,12 @@ async function createAppointment(req, res, next) {
       { $push: { appointments: newAppointment._id } }
     )
 
-    return res.status(201).json(newAppointment)
+    const populateAppointments = await Appointment.findById(newAppointment._id)
+      .populate('service')
+      .populate('doctor')
+      .populate('patient')
+
+    return res.status(201).json(populateAppointments)
   } catch (err) {
     next(err)
   }

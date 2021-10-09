@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
+
 const Doctor = (doctor) => {
   return (
-    <div key={doctor.id} className='tile is-child is-primary'>
-      <h2 className='title'>
+    <div key={doctor.id} className="tile is-child is-primary">
+      <h2 className="title">
         {doctor.name} ({doctor.bio})
       </h2>
-      <p className='subtitle'>
+      <p className="subtitle">
         {doctor.services} ({doctor.appointments})
       </p>
     </div>
-  )
-}
-export default Doctor
+  );
+};
+export default Doctor;

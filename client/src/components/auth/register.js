@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { registerUser } from "../../api/auth.js";
-import "../../styles/styles.css";
 
 const Register = () => {
   const history = useHistory();
@@ -39,19 +38,18 @@ const Register = () => {
       [e.target.name]: e.target.value,
     };
 
-    console.log("Testing for formdata", state.formData.email);
-
     setState({ formData });
   };
 
   return (
-    <>
-      <h1>Register</h1>
+    <div class="section">
+      <h1 className="title has-text-centered">Registration Form</h1>
       <div id="registration-form">
         <form onSubmit={handleSubmit}>
-          <div id="username">
-            <label>Username</label>
+          <div class="field">
+            <label class="label">Username</label>
             <input
+              class="input"
               placeholder="Username"
               name={"username"}
               type="text"
@@ -60,10 +58,11 @@ const Register = () => {
             />
           </div>
 
-          <div id="email">
-            <label>Email</label>
+          <div class="field">
+            <label class="label">Email</label>
             <input
-              placeholder="Email"
+              class="input"
+              placeholder="e.g. johndoe@seisurgery.com"
               name={"email"}
               type="email"
               value={state.formData.email}
@@ -71,9 +70,10 @@ const Register = () => {
             />
           </div>
 
-          <div id="password">
-            <label>Password</label>
+          <div class="field">
+            <label class="label">Password</label>
             <input
+              class="input"
               placeholder="Password"
               name={"password"}
               type="password"
@@ -82,9 +82,10 @@ const Register = () => {
             />
           </div>
 
-          <div id="confirmPassword">
-            <label>Confirm Password</label>
+          <div class="field">
+            <label class="label">Confirm Password</label>
             <input
+              class="input"
               placeholder="Confirm password"
               name={"passwordConfirmation"}
               type="password"
@@ -93,10 +94,11 @@ const Register = () => {
             />
           </div>
 
-          <div id="firstName">
-            <label>First Name</label>
+          <div class="field">
+            <label class="label">First Name</label>
             <input
-              placeholder="John"
+              class="input"
+              placeholder="e.g. John"
               name={"firstName"}
               type="text"
               value={state.formData.firstName}
@@ -104,10 +106,11 @@ const Register = () => {
             />
           </div>
 
-          <div id="surname">
-            <label>Surname</label>
+          <div class="field">
+            <label class="label">Surname</label>
             <input
-              placeholder="Doe"
+              class="input"
+              placeholder="e.g. Doe"
               name={"surname"}
               type="text"
               value={state.formData.surname}
@@ -115,10 +118,10 @@ const Register = () => {
             />
           </div>
 
-          <div id="dateOfBirth">
-            <label>Date of Birth</label>
+          <div class="field">
+            <label class="label">Date of Birth</label>
             <input
-              placeholder="01/01/2000"
+              class="input"
               name={"dateOfBirth"}
               type="date"
               value={state.formData.dateOfBirth}
@@ -126,23 +129,38 @@ const Register = () => {
             />
           </div>
 
-          <div id="gender">
-            <label>Gender</label>
-            <input
+          <div class="field">
+            <label class="label">Sex</label>
+            {/* <input
+              class="input"
               placeholder="Gender"
               name={"gender"}
               type="text"
               value={state.formData.gender}
               onChange={handleChange}
-            />
+            /> */}
+            <div class="control">
+              <div class="select">
+                <select>
+                  <option value={state.formData.gender}>Select</option>
+                  <option value={state.formData.gender}>Male</option>
+                  <option value={state.formData.gender}>Female</option>
+                  <option value={state.formData.gender}>Other</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div id="submit-button">
-            <input type="submit" value="Register" />
+            <input
+              class="button is-large is-danger"
+              type="submit"
+              value="Register"
+            />
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

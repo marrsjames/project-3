@@ -20,11 +20,13 @@ const Login = () => {
       if ((res.status === 200) | (res.status === 202)) {
         setToken(res.data.token);
         // callback();
-        history.push("/home");
+        history.push("/appointments");
       }
     } catch (err) {
       console.error("Error logging in user", err);
     }
+
+    alert(`Welcome ${user.firstName}!`);
   };
 
   const handleChange = (e) => {
@@ -37,13 +39,14 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1>Login</h1>
+    <div class="section">
+      <h1 className="title has-text-centered">Login Form</h1>
       <div id="login-form">
         <form onSubmit={handleSubmit}>
-          <div id="username">
-            <label>Username</label>
+          <div class="field">
+            <label class="label">Username</label>
             <input
+              class="input"
               placeholder="Username"
               name={"username"}
               value={state.formData.username}
@@ -52,8 +55,9 @@ const Login = () => {
           </div>
 
           <div id="password">
-            <label>Password</label>
+            <label class="label">Password</label>
             <input
+              class="input"
               placeholder="Password"
               name="password"
               type="password"
@@ -63,11 +67,15 @@ const Login = () => {
           </div>
 
           <div id="submit-button">
-            <input type="submit" value="Login" />
+            <input
+              class="button is-large is-danger"
+              type="submit"
+              value="Login"
+            />
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -131,8 +131,8 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
               //   setHours(setMinutes(new Date(), 30), 19),
               //   setHours(setMinutes(new Date(), 30), 17),
               // ]}
-              minTime={setHours(setMinutes(new Date(), 0), 9)}
-              maxTime={setHours(setMinutes(new Date(), 0), 17)}
+              // minTime={setHours(setMinutes(new Date(), 0), 9)}
+              // maxTime={setHours(setMinutes(new Date(), 0), 17)}
             />
 
             <select

@@ -42,14 +42,14 @@ const Register = () => {
   }
 
   return (
-    <div class='section'>
+    <div className='section'>
       <h1 className='title has-text-centered'>Registration Form</h1>
       <div id='registration-form'>
         <form onSubmit={handleSubmit}>
-          <div class='field'>
-            <label class='label'>Username</label>
+          <div className='field'>
+            <label className='label'>Username</label>
             <input
-              class='input'
+              className='input'
               placeholder='Username'
               name={'username'}
               type='text'
@@ -58,10 +58,10 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>Email</label>
+          <div className='field'>
+            <label className='label'>Email</label>
             <input
-              class='input'
+              className='input'
               placeholder='e.g. johndoe@seisurgery.com'
               name={'email'}
               type='email'
@@ -70,10 +70,10 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>Password</label>
+          <div className='field'>
+            <label className='label'>Password</label>
             <input
-              class='input'
+              className='input'
               placeholder='Password'
               name={'password'}
               type='password'
@@ -82,10 +82,10 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>Confirm Password</label>
+          <div className='field'>
+            <label className='label'>Confirm Password</label>
             <input
-              class='input'
+              className='input'
               placeholder='Confirm password'
               name={'passwordConfirmation'}
               type='password'
@@ -94,10 +94,10 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>First Name</label>
+          <div className='field'>
+            <label className='label'>First Name</label>
             <input
-              class='input'
+              className='input'
               placeholder='e.g. John'
               name={'firstName'}
               type='text'
@@ -106,10 +106,10 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>Surname</label>
+          <div className='field'>
+            <label className='label'>Surname</label>
             <input
-              class='input'
+              className='input'
               placeholder='e.g. Doe'
               name={'surname'}
               type='text'
@@ -118,10 +118,10 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>Date of Birth</label>
+          <div className='field'>
+            <label className='label'>Date of Birth</label>
             <input
-              class='input'
+              className='input'
               name={'dateOfBirth'}
               type='date'
               value={state.formData.dateOfBirth}
@@ -129,18 +129,18 @@ const Register = () => {
             />
           </div>
 
-          <div class='field'>
-            <label class='label'>Sex</label>
+          <div className='field'>
+            <label className='label'>Sex</label>
             {/* <input
-              class="input"
+              className="input"
               placeholder="Gender"
               name={"gender"}
               type="text"
               value={state.formData.gender}
               onChange={handleChange}
             /> */}
-            <div class='control'>
-              <div class='select'>
+            <div className='control'>
+              <div className='select'>
                 <select>
                   <option value={state.formData.gender}>Select</option>
                   <option value={state.formData.gender}>Male</option>
@@ -153,7 +153,7 @@ const Register = () => {
 
           <div id='submit-button'>
             <input
-              class='button is-large is-danger'
+              className='button is-large is-danger'
               type='submit'
               value='Register'
             />

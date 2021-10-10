@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllDoctors } from '../../api/doctors.js'
+import { getAllPatients } from '../../api/PatientsApi.js'
+import { getAllServices } from '../../api/ServicesApi.js'
+import DatePicker from 'react-datepicker'
+import Moment from 'moment'
 
 const AllAppointments = ({ appointmentsList }) => {
   // console.log('list is', appointmentsList)
   const [doctors, setDoctors] = useState([])
-  const [availableNames, setAvailableNames] = useState([])
-  const [visibleName, setVisibleName] = useState(null)
+  const [patients, setPatients] = useState([])
+  const [services, setServices] = useState([])
+  const [visibleDoctor, setVisibleDoctor] = useState(null)
+  const [visiblePatient, setVisiblePatient] = useState(null)
+  const [visibleService, setVisibleService] = useState(null)
+  const [visibleDate, setVisibleDate] = useState()
   useEffect(() => {
     getAllDoctors().then((doctors) => setDoctors(doctors))
+    getAllPatients().then((patients) => setPatients(patients))
+    getAllServices().then((services) => setServices(services))
   }, [])
 
   appointmentsList.sort(
@@ -18,36 +28,126 @@ const AllAppointments = ({ appointmentsList }) => {
   )
 
   useEffect(() => {
-    const names = appointmentsList
+    appointmentsList
       .map((appointment) => appointment.doctor)
       .filter((doctor) => doctor !== null)
-    setAvailableNames([...new Set(names)])
   }, [appointmentsList])
 
-  // console.log(
-  //   appointmentsList.filter((appointment) =>
-  //     console.log(appointment.doctor[0].name)
-  //   )
-  // )
+  useEffect(() => {
+    appointmentsList
+      .map((appointment) => appointment.service)
+      .filter((service) => service !== null)
+  }, [appointmentsList])
 
-  //console.log(doctors)
-  doctors.map((doctor) => console.log(doctor.name))
-  // availableNames.map((appointments) => console.log(appointments[0].name))
-  // console.log(availableNames)
-  // console.log('sorted list is ', sortedAppointments)
+  useEffect(() => {
+    appointmentsList
+      .map((appointment) => appointment.patient)
+      .filter((patient) => patient !== null)
+  }, [appointmentsList])
+
+  const handleReset = () => {
+    setVisibleDoctor(null)
+    setVisibleService(null)
+    setVisiblePatient(null)
+    setVisibleDate(null)
+  }
+  console.log(appointmentsList.map((appt) => new Date(appt.date).getFullYear()))
+  console.log(
+    appointmentsList.map((appt) => Moment(appt.date).format('YYYY-MM-DD'))
+  )
+
+  console.log(Moment(visibleDate).format('YYYY-MM-DD'))
   return (
     <>
-      {doctors.map((doctor) => (
-        <button onClick={() => setVisibleName(doctor.name)}>
-          {doctor.name}
+      <div className='buttons'>
+        {doctors.map((doctor) => (
+          <button
+            className='button is-info is-small'
+            key={doctor._id}
+            onClick={() => setVisibleDoctor(doctor.name)}
+          >
+            {doctor.name}
+          </button>
+        ))}
+        <button
+          className='button is-warning is-small'
+          onClick={() => setVisibleDoctor(null)}
+        >
+          Reset Doctors filter
         </button>
-      ))}
-      <button onClick={() => setVisibleName(null)}>Reset</button>
+        <p>Current Doctor filter: {visibleDoctor}</p>
+      </div>
+      <div className='buttons'>
+        {services.map((service) => (
+          <button
+            className='button is-info is-small'
+            key={service._id}
+            onClick={() => setVisibleService(service.name)}
+          >
+            {service.name}
+          </button>
+        ))}
+        <button
+          className='button is-warning is-small'
+          onClick={() => setVisibleService(null)}
+        >
+          Reset Services filter
+        </button>
+        <p>Current Service filter: {visibleService}</p>
+      </div>
+      <div className='buttons'>
+        {patients.map((patient) => (
+          <button
+            className='button is-info is-small'
+            key={patient._id}
+            onClick={() => setVisiblePatient(patient.name)}
+          >
+            {patient.name}
+          </button>
+        ))}
+        <button
+          className='button is-warning is-small'
+          onClick={() => setVisiblePatient(null)}
+        >
+          Reset Services filter
+        </button>
+        <p>Current Service filter: {visiblePatient}</p>
+      </div>
+      <div className='buttons'>
+        <DatePicker
+          selected={visibleDate}
+          onChange={(date) => setVisibleDate(date)}
+        />
+        <button
+          className='button is-warning is-small'
+          onClick={() => setVisibleDate(null)}
+        >
+          Reset Date filter
+        </button>
+        <p>Current Date filter: {visibleDate?.toLocaleDateString()}</p>
+      </div>
+      <button className='button is-warning is-small' onClick={handleReset}>
+        Reset all filters
+      </button>
       <h1>appointments!</h1>
       {appointmentsList
         .filter(
           (appointment) =>
-            !visibleName || appointment.doctor[0].name === visibleName
+            !visibleDoctor || appointment.doctor[0].name === visibleDoctor
+        )
+        .filter(
+          (appointment) =>
+            !visibleService || appointment.service[0].name === visibleService
+        )
+        .filter(
+          (appointment) =>
+            !visiblePatient || appointment.patient[0].name === visiblePatient
+        )
+        .filter(
+          (appointment) =>
+            !visibleDate ||
+            Moment(appointment.date).format('YYYY-MM-DD') ===
+              Moment(visibleDate).format('YYYY-MM-DD')
         )
         .map((appointment) => (
           <div key={appointment._id}>

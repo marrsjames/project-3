@@ -10,11 +10,18 @@ import setHours from 'date-fns/setHours'
 import setMinutes from 'date-fns/setMinutes'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const AppointmentNew = ({ pushAppointment }) => {
+const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
   const history = useHistory()
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
   const [services, setServices] = useState([])
+  // console.log('list is', appointmentsList)
+
+  // {
+  //   appointmentsList.map((appointment) =>
+  //     appointment.date.map((date) => console.log(date))
+  //   )
+  // }
 
   useEffect(() => {
     getAllDoctors().then((doctors) => {
@@ -49,9 +56,9 @@ const AppointmentNew = ({ pushAppointment }) => {
     e.preventDefault()
 
     try {
-      console.log('state.formData', state.formData)
+      // console.log('state.formData', state.formData)
       const result = await createAppointment(state.formData)
-      console.log('result is ', result.data)
+      // console.log('result is ', result.data)
       // console.log(state.formData)
       //console.log('result.data', result.data)
       pushAppointment(result.data)
@@ -75,7 +82,7 @@ const AppointmentNew = ({ pushAppointment }) => {
       ...state.formData,
       ...newFormData,
     }
-    console.log({ formData })
+    // console.log({ formData })
     setState({ formData })
   }
 
@@ -83,6 +90,26 @@ const AppointmentNew = ({ pushAppointment }) => {
     updateFormData(e.target.name, e.target.value)
   }
 
+  const appointmentDates = appointmentsList.map(
+    (appointment) => new Date(appointment.date)
+  )
+
+  // const firstDate = new Date(appointmentDates[0])
+  // console.log(firstDate.getHours())
+  console.log(appointmentDates)
+
+  //if
+  {
+    appointmentDates.map((appointment) =>
+      console.log(
+        appointment.getDate(),
+        appointment.getMonth(),
+        appointment.getFullYear(),
+        appointment.getHours(),
+        appointment.getMinutes()
+      )
+    )
+  }
   return (
     <section>
       <div>
@@ -90,27 +117,22 @@ const AppointmentNew = ({ pushAppointment }) => {
           <form onSubmit={handleSubmit}>
             <div>
               <label>Description</label>
-              {/* <div>
-                <textarea
-                  placeholder='Type in date'
-                  name='date'
-                  value={state.formData.date}
-                  onChange={handleChange}
-                />
-              </div> */}
             </div>
             <DatePicker
               selected={state.formData.date}
               onChange={(date) => updateFormData('date', date)}
-              // onChange={handleChange}
               showTimeSelect
               dateFormat='Pp'
-              excludeTimes={[
-                setHours(setMinutes(new Date(), 0), 17),
-                setHours(setMinutes(new Date(), 30), 18),
-                setHours(setMinutes(new Date(), 30), 19),
-                setHours(setMinutes(new Date(), 30), 17),
-              ]}
+              //date picjer then time picker
+              // pick date then excluded times are taken from that
+              // excludeTimes={[
+              //   setHours(setMinutes(new Date(), 0), 13),
+              //   setHours(setMinutes(new Date(), 30), 18),
+              //   setHours(setMinutes(new Date(), 30), 19),
+              //   setHours(setMinutes(new Date(), 30), 17),
+              // ]}
+              minTime={setHours(setMinutes(new Date(), 0), 9)}
+              maxTime={setHours(setMinutes(new Date(), 0), 17)}
             />
 
             <select

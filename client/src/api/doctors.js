@@ -1,4 +1,5 @@
 import axios from "axios";
+//const baseUrl = "http://localhost:3000/api";
 
 export const getAllDoctors = async () => {
   const options = { method: "GET", url: `/api/doctors` };

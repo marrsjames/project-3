@@ -3,6 +3,7 @@ import mongooseUniqueValidator from "mongoose-unique-validator";
 
 const doctorSchema = new mongoose.Schema({
   name: String,
+  quailfications: String,
   bio: String,
   url: String,
   image: String,

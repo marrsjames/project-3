@@ -1,5 +1,7 @@
 import React from "react";
 import images from "../images/index.js";
+import { Link } from "react-router-dom";
+import "../styles/styles.scss";
 
 const doctorsCharactersEndpoint = "http://localhost:3000/api/doctors";
 
@@ -12,19 +14,19 @@ const DoctorsCharacterCard = () => {
   }, []);
   console.log(doctors);
   return (
-    <div className="doctors-wrapper">
+    <div className="columns is-full is-3">
       {doctors.map((doctor) => (
         <div className="doctor-card" key={doctor.name}>
           <div className="doctor-card-top">
-            <img
-              src={doctor.url}
-              alt={doctor.image}
-              loading="lazy"
-              width="225"
-              height="255"
-            />
-            <p>Name:{doctor.name}</p>
-            <p>Biography:{doctor.bio}</p>
+            <figure class="image is-1by1">
+              <img src={doctor.url} alt={doctor.image} loading="lazy" />
+            </figure>
+            <div class="notification is-warning">
+              <p>Name:{doctor.name}</p>
+            </div>
+            <div class="notification is-success is-light">
+              <p>Biography:{doctor.bio}</p>
+            </div>
             <p>Appointments:{doctor.appointments}</p>
             <button>Click to make an appointment</button>
           </div>

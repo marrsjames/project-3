@@ -3,8 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { loginUser } from '../../api/auth.js'
 import { setToken } from '../../api/token.js'
 
-const Login = () => {
-  const history = useHistory()
+
+const Login = ({ callback }) => {
+  const history = useHistory();
   const [state, setState] = React.useState({
     formData: {
       username: '',
@@ -18,16 +19,15 @@ const Login = () => {
     try {
       const res = await loginUser(state.formData)
       if ((res.status === 200) | (res.status === 202)) {
-        setToken(res.data.token)
-        // callback();
-        history.push('/appointments')
+        setToken(res.data.token);
+        callback();
+        history.push("/appointments");
       }
     } catch (err) {
       console.error('Error logging in user', err)
     }
+  };
 
-    alert(`Welcome ${user.firstName}!`)
-  }
 
   const handleChange = (e) => {
     const formData = {

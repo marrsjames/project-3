@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 //import Appointment from '../../../../models/appointment'
 import { createAppointment } from '../../api/AppointmentsApi.js'
 import { getAllDoctors } from '../../api/doctors.js'
@@ -50,10 +50,10 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
       doctor: '',
       patient: '',
     },
-  })
+  });
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       // console.log('state.formData', state.formData)
@@ -64,14 +64,16 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
       pushAppointment(result.data)
       history.push('/appointments')
     } catch (err) {
-      console.log('error creating appointment', err)
+      console.log("error creating appointment", err);
     }
-  }
+  };
+
 
   const updateFormData = (name, value) => {
     const formData = {
       ...state.formData,
       [name]: value,
+
     }
     console.log({ formData })
     setState({ formData })
@@ -136,7 +138,7 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
             />
 
             <select
-              name='doctor'
+              name="doctor"
               value={state.formData.doctor}
               onChange={handleChange}
             >
@@ -147,7 +149,7 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
               ))}
             </select>
             <select
-              name='service'
+              name="service"
               value={state.formData.service}
               onChange={handleChange}
             >
@@ -158,7 +160,7 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
               ))}
             </select>
             <select
-              name='patient'
+              name="patient"
               value={state.formData.patient}
               onChange={handleChange}
             >
@@ -169,13 +171,13 @@ const AppointmentNew = ({ pushAppointment, appointmentsList }) => {
               ))}
             </select>
             <div>
-              <input type='submit' value='Create appointment' />
+              <input type="submit" value="Create appointment" />
             </div>
           </form>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default AppointmentNew
+export default AppointmentNew;

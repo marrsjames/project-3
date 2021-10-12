@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import AllAppointments from '../components/appointments/AllAppointments.js'
@@ -14,6 +13,7 @@ import Covid from './coronavirus/covid.js'
 import { getAllAppointments } from '../api/AppointmentsApi.js'
 import { isLoggedIn } from "../api/token.js";
 import Logout from "./auth/logout.js";
+import DoctorsCharacterCard from "../doctors/DoctorsCharacterCard";
 
 const App = () => {
   const [appointments, setAppointments] = useState([]);
@@ -54,7 +54,7 @@ const App = () => {
         <Route exact path="/newappointment" component={element2} />
         <Route path="/about" component={About} />
         <Route path="/coronavirus" component={Covid} />
-        <Route path="/doctors" component={AllDoctors} />
+        <Route path="/doctors" component={DoctorsCharacterCard} />
         <Route path="/register" component={Register} />
         <Route
           path="/login"
@@ -66,10 +66,9 @@ const App = () => {
             <Logout callback={() => setIsAuthenticated(false)} />
           )}
         />
-
       </Switch>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default App
+export default App;

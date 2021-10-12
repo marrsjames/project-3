@@ -96,7 +96,7 @@ const NavBar = ({ isAuthenticated }) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

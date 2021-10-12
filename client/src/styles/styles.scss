@@ -1,17 +1,36 @@
-@import '~bulma/bulma.sass';
+@import "~bulma/bulma.sass";
 
 h1 {
-font-size: 2em;
-color: blue;
+  font-size: 2em;
+  color: blue;
 }
 
-.wrap{
-    flex-wrap: wrap;
-} 
+.wrap {
+  flex-wrap: wrap;
+}
 
-.tile{
-    flex-basis:20%;
-    border:5px solid black;
-    border-radius: 0.5rem;
+.tile {
+  flex-basis: 20%;
+  border: 5px solid black;
+  border-radius: 0.5rem;
+}
 
+/*--------------------- REGISTRATION FORM SPECIFIC -----------------------*/
+
+#registration-form {
+  border: 2px black solid;
+  padding: 50px;
+}
+
+#login-form {
+  border: 2px black solid;
+  padding: 50px;
+}
+
+#submit-button {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 }

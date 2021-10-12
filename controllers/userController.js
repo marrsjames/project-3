@@ -1,34 +1,5 @@
 import jwt from "jsonwebtoken";
-
 import User from "../models/user.js";
-
-// ! Added a new controller function to create a user
-async function registerUser(req, res, next) {
-  const body = req.body;
-  console.log("Body is", body);
-  try {
-    const user = await User.create({ ...body, isAdmin: false });
-    res.status(201).send(user);
-  } catch (err) {
-    next(err);
-  }
-}
-
-// async function promoteUser(req, res, next) {
-//   const body = req.body;
-//   try {
-//     if (!req.isUserAdmin) {
-//       return res.status(401).send({ message: "Only admins can create admins" });
-//     }
-
-//     const user = await User.findOne({ _id: body.userId });
-//     user.set({ isAdmin: true });
-//     user.save();
-//     res.status(201).send(user);
-//   } catch (err) {
-//     next(err);
-//   }
-// }
 
 async function getAllUsers(req, res, next) {
   try {
@@ -43,53 +14,75 @@ async function getAllUsers(req, res, next) {
   }
 }
 
-// async function demoteUser(req, res, next) {
-//   const body = req.body;
-//   try {
-//     if (!req.isUserAdmin) {
-//       return res.status(401).send({ message: "Only admins can create admins" });
-//     }
-
-//     const user = await User.findOne({ _id: body.userId });
-//     user.set({ isAdmin: false });
-//     user.save();
-//     res.status(201).send(user);
-//   } catch (err) {
-//     next(err);
-//   }
-// }
+async function registerUser(req, res, next) {
+  const body = req.body;
+  try {
+    const user = await User.create({ ...body, isAdmin: false });
+    res.status(201).send(user);
+  } catch (err) {
+    next(err);
+  }
+}
 
 async function loginUser(req, res, next) {
   const password = req.body.password;
   try {
-    // ! 1) See if there's a user whose email matches the one we're asking for
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({
+      username: req.body.username,
+    });
 
-    // ! 2) Hash our login password, compare this to our user password
     if (!user.validatePassword(password)) {
       return res.status(401).send({ message: "Unauthorized" });
     }
 
-    // ! 3) Create a JWT (json web token) and send this back to the client
-    // ? So you can use the token to pass user info, as well
-    // ? as have expiry times on your sessions
     const token = jwt.sign(
-      { userId: user._id }, // ? PAYLOAD: information we're storing on the token
-      process.env.SECRET, // ? A secret string only we know
-      { expiresIn: "12h" } // ? The token will expire in 12 hours.
+      { userId: user._id },
+      process.env.SECRET, //
+      { expiresIn: "1h" }
     );
 
-    // ! 202 -> Accepted
     res.status(202).send({ token, message: "Login successful!" });
   } catch (err) {
     next(err);
   }
 }
 
+async function demoteUser(req, res, next) {
+  const body = req.body;
+  try {
+    if (!req.isUserAdmin) {
+      return res.status(401).send({ message: "Only admins can create admins" });
+    }
+
+    const user = await User.findOne({ _id: body.userId });
+    user.set({ isAdmin: false });
+    user.save();
+    res.status(201).send(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function promoteUser(req, res, next) {
+  const body = req.body;
+  try {
+    if (!req.isUserAdmin) {
+      return res.status(401).send({ message: "Only admins can create admins" });
+    }
+
+    const user = await User.findOne({ _id: body.userId });
+    user.set({ isAdmin: true });
+    user.save();
+    res.status(201).send(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
 export default {
+  getAllUsers,
   registerUser,
   loginUser,
-  // promoteUser,
-  // demoteUser,
-  getAllUsers,
+  promoteUser,
+  demoteUser,
 };

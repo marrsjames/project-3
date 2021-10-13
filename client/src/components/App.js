@@ -13,6 +13,7 @@ import { getAllAppointments } from "../api/AppointmentsApi.js";
 import { isLoggedIn } from "../api/token.js";
 import Logout from "./auth/logout.js";
 import DoctorsCharacterCard from "../doctors/DoctorsCharacterCard";
+//import DoctorsCharacterCard2 from "../doctors/DoctorsCharacterCard2";
 
 const App = () => {
   const [appointments, setAppointments] = useState([]);

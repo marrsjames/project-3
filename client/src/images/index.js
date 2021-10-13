@@ -1,5 +1,14 @@
-import DrHibbert from "./DrHibbert.jpeg";
-import DrNickRiveria from "./DrNickRiveria.jpeg";
+import DrArjunDoel from "./DrADoel.png";
+import DrAntonyLong from "./DrALong.png";
+import DrDoogieHowser from "./DrDHowser.png";
+import DrJamesMarrs from "./DrJMarrs.png";
+import DrTomBriody from "./DrTBriody.png";
 import NurseJackie from "./NurseJackie.jpg";
-import DrSnoopy from "./DrSnoopy.png";
-export default { DrHibbert, DrNickRiveria, NurseJackie, DrSnoopy };
+export default {
+  DrArjunDoel,
+  DrAntonyLong,
+  DrDoogieHowser,
+  DrJamesMarrs,
+  DrTomBriody,
+  NurseJackie,
+};

@@ -1,6 +1,6 @@
 import React from "react";
 import images from "../images/index.js";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import "../styles/styles.scss";
 
 const doctorsCharactersEndpoint = "http://localhost:3000/api/doctors";
@@ -13,22 +13,42 @@ const DoctorsCharacterCard = () => {
       .then((data) => setDoctors(data));
   }, []);
   console.log(doctors);
+
   return (
-    <div className="columns is-full is-3">
+    <div className="card-wrapper">
       {doctors.map((doctor) => (
-        <div className="doctor-card" key={doctor.name}>
-          <div className="doctor-card-top">
-            <figure class="image is-1by1">
-              <img src={doctor.url} alt={doctor.image} loading="lazy" />
-            </figure>
-            <div class="notification is-warning">
-              <p>Name:{doctor.name}</p>
+        <div className="columns is-multiline">
+          <div className="column is-one-third">
+            <div className="card" key={doctor.name}>
+              <div className="card-header has-background-primary-light">
+                <h2>{doctor.name}</h2>
+                <h3>{doctor.qualifications}</h3>
+              </div>
+              <div className="card-image">
+                <figure className="image is-128x128">
+                  <img
+                    className="is-rounded"
+                    src="https://bulma.io/images/placeholder/128x128.png"
+                    src={doctor.url}
+                    alt={doctor.image}
+                    loading="lazy"
+                  />
+                </figure>
+              </div>
+              <div className="card-bio has-background-link-light">
+                <br />
+                <h4>
+                  Doctor Information:
+                  <br />
+                  {doctor.bio}
+                </h4>
+                <br />
+                <h4>Appointments:{doctor.appointments}</h4>
+                <button className="button is-dark is-danger are-large is-outlined is-rounded has-background-link-light">
+                  Click to make an appointment
+                </button>
+              </div>
             </div>
-            <div class="notification is-success is-light">
-              <p>Biography:{doctor.bio}</p>
-            </div>
-            <p>Appointments:{doctor.appointments}</p>
-            <button>Click to make an appointment</button>
           </div>
         </div>
       ))}
@@ -37,3 +57,47 @@ const DoctorsCharacterCard = () => {
 };
 
 export default DoctorsCharacterCard;
+
+/* <div className="notification is-warning">
+                <h2>Name:{doctor.name}</h2>
+              </div>
+ this code worked   from ln 17 - 54
+ <section className="section">
+      <div className="container">
+        <div className="columns is-multiline">
+          <div className="column is-one-third">
+            {doctors.map((doctor) => (
+              <div className="card">
+                <div className="card-header">
+                  <div
+                    className="card-header-title notification is-success"
+                    key={doctor.name}
+                  >
+                    <h1>Name:{doctor.name}</h1>
+                  </div>
+                  <div className="card-image">
+                    <figure class="image is-1by1">
+                      <img
+                        src={doctor.url}
+                        alt={doctor.image}
+                        loading="lazy"
+                        width="255"
+                        height="255"
+                      /> 
+                    </figure>
+                    <div class="notification is-success is-light">
+                      <h3>Biography:{doctor.bio}</h3>
+                    </div>
+                    <h3>Appointments:{doctor.appointments}</h3>
+                    <button className="button is-dark is-danger are-large is-outlined is-rounded">
+                      Click to make an appointment
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+              */

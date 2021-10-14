@@ -15,44 +15,57 @@ const DoctorsCharacterCard = () => {
   console.log(doctors);
 
   return (
-    <div className="card-wrapper">
-      {doctors.map((doctor) => (
+    <section className="section">
+      <div className="container">
         <div className="columns is-multiline">
-          <div className="column is-one-third">
-            <div className="card" key={doctor.name}>
-              <div className="card-header has-background-primary-light">
-                <h2>{doctor.name}</h2>
-                <h3>{doctor.qualifications}</h3>
-              </div>
-              <div className="card-image">
-                <figure className="image is-128x128">
-                  <img
-                    className="is-rounded"
-                    src="https://bulma.io/images/placeholder/128x128.png"
-                    src={doctor.url}
-                    alt={doctor.image}
-                    loading="lazy"
-                  />
-                </figure>
-              </div>
-              <div className="card-bio has-background-link-light">
-                <br />
-                <h4>
-                  Doctor Information:
-                  <br />
-                  {doctor.bio}
-                </h4>
-                <br />
-                <h4>Appointments:{doctor.appointments}</h4>
-                <button className="button is-dark is-danger are-large is-outlined is-rounded has-background-link-light">
-                  Click to make an appointment
-                </button>
+          {doctors.map((doctor) => (
+            <div className="column is-one-third">
+              <div className="box">
+                <div className="card" key={doctor.name}>
+                  <div className="card-header has-background-primary-light">
+                    <h2>{doctor.name}</h2>
+                    <h3>{doctor.qualifications}</h3>
+                  </div>
+                  <div className="card-image">
+                    <figure className="image is-128x128">
+                      <img
+                        className="is-rounded"
+                        src="https://bulma.io/images/placeholder/128x128.png"
+                        src={doctor.url}
+                        alt={doctor.image}
+                        loading="lazy"
+                      />
+                    </figure>
+                  </div>
+                  <div className="card-bio has-background-link-light">
+                    <br />
+                    <h4>
+                      <u> Doctor Information:</u>
+                      <br />
+                      {doctor.bio}
+                    </h4>
+                    <br />
+                    <h4>Appointments:{doctor.appointments}</h4>
+                    <button className="button is-success is-hovered is-default is-outlined">
+                      <span className="icon-text">
+                        <span className="icon is-small">
+                          <i class="fas fa-calendar-check"></i>
+                        </span>
+                        <span>
+                          <a href="./appointments">
+                            Click to book appointment.
+                          </a>
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
 

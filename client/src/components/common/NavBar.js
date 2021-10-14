@@ -48,7 +48,7 @@ const NavBar = ({ isAuthenticated }) => {
             </div>
           </div>
 
-          <Link to="/logout" classname="navbar-item navbar-end">
+          <Link to="/logout" className="navbar-item navbar-end">
             <span class="icon">
               <i class="fas fa-sign-out-alt"></i>
             </span>
@@ -96,7 +96,7 @@ const NavBar = ({ isAuthenticated }) => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

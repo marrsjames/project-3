@@ -1,22 +1,46 @@
 import React from "react";
-import homepicSrc from "../../images/Homepage-Pic1.jpg";
-import nhsInIT from "../../images/NHS-In-It-Together.jpg";
-import practiceNurse from "../../images/practice-nurse.jpg";
+import homepicSrc from "../../images/HomepagePic1.jpeg";
+import nhsInIt from "../../images/nhsInIt.jpeg";
+import practiceNurse from "../../images/practice-nurse.jpeg";
 
 const Home = () => {
   return (
-    <section className="hero is-fullheight-with-navbar is-success">
+    <section
+      className="hero is-fullheight-with-navbar is-success
+    "
+    >
       <div className="hero-body">
         <div className="title is-1 has-text-centered has-text-black">
-          <h1>GA SURGERY</h1>
+          <h1>
+            <i class="fas fa-clinic-medical"></i>GA-ASSEMBLY SURGERY
+            <i class="fas fa-laptop-medical"></i>
+          </h1>
           <p>
-            This is the homepage. We will have a picture of doctors smiling and
-            laughing whilst jabbing patients.
+            Welcome to GA-Surgery. We offer the best medical service in London.
+            We look forward to meeting and treating you as our valued clients.
           </p>
-
-          <img src={homepicSrc} alt="" height="500" width="500" />
-          <img src={nhsInIT} alt="" height="500" width="500" />
-          <img src={practiceNurse} alt="" height="500" width="500" />
+          <div className="columns is-multiline">
+            <div className="column">
+              <figure className="image1">
+                <img src={homepicSrc} height="400px" width="400px" />
+                <div>
+                  <p className="text">Professional service</p>
+                </div>
+              </figure>
+            </div>
+            <div className="column">
+              <figure className="images">
+                <img src={nhsInIt} />
+                <p className="text">Caring staff</p>
+              </figure>
+            </div>
+            <div className="column">
+              <figure className="images">
+                <img src={practiceNurse} />
+                <p className="text">Best medical care</p>
+              </figure>
+            </div>
+          </div>
         </div>
       </div>
     </section>

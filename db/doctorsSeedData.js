@@ -1,6 +1,6 @@
 export const doctorsSeedData = [
   {
-    name: "Doctor James Marrs.",
+    name: "Doctor James Marrs",
     quailifications: "BMBS",
     bio: "James graduated from London Medical School.James will be your doctor if you book a general checkup.",
     url: "https://i.imgur.com/esqZ9VF.png",
@@ -18,7 +18,7 @@ export const doctorsSeedData = [
     appointments: [],
   },
   {
-    name: "Doctor Antony Long.",
+    name: "Doctor Antony Long",
     quailifications: "BMBS",
     bio: "Antony graduated from London Medical School. Antony will be your doctor for blood testing. ",
     url: "https://i.imgur.com/LABOwcd.png",

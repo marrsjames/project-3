@@ -19,7 +19,7 @@ const DoctorsCharacterCard = () => {
       <div className="container">
         <div className="columns is-multiline">
           {doctors.map((doctor) => (
-            <div className="column is-one-third">
+            <div className="column is-one-third ">
               <div className="box">
                 <div className="card" key={doctor.name}>
                   <div className="card-header has-background-primary-light">
@@ -29,7 +29,7 @@ const DoctorsCharacterCard = () => {
                   <div className="card-image">
                     <figure className="image is-128x128">
                       <img
-                        className="is-rounded"
+                        className="is-square"
                         src="https://bulma.io/images/placeholder/128x128.png"
                         src={doctor.url}
                         alt={doctor.image}

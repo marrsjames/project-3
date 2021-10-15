@@ -32,7 +32,7 @@ export const editAppointment = async (id, formData) => {
     url: `/api/appointments/${id}/edit`,
   };
 
-  console.log(`${id}`);
+  console.log();
 
   return axios(options);
 };

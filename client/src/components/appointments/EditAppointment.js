@@ -55,7 +55,7 @@ const EditAppointment = () => {
 
     try {
       const res = await editAppointment(apptForm.formData, id);
-      pushAppointment(res.data.id);
+      pushAppointment(res.data);
       history.push("/appointments");
     } catch (error) {
       console.log("Error updating appointment", error);

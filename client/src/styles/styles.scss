@@ -53,11 +53,24 @@ h4{
 .images img{
   height:400px;
   width:400px;
-  padding: 10px
+  padding: 10px;
+  border: 2px solid black;
 }
 .text{
   font-size:large;
   color:blue;
   font-family: fantasy;
-  padding:05px
+  padding:05px;
+}
+.googleMap{
+  width:300px;
+  height:400px;
+  border: 2px solid black;
+}
+.heading h1{
+  color:green;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-size: 8em;
 }

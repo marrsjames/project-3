@@ -15,57 +15,62 @@ const DoctorsCharacterCard = () => {
   console.log(doctors);
 
   return (
-    <section className="section">
-      <div className="container">
-        <div className="columns is-multiline">
-          {doctors.map((doctor) => (
-            <div className="column is-one-third ">
-              <div className="box">
-                <div className="card" key={doctor.name}>
-                  <div className="card-header has-background-primary-light">
-                    <h2>{doctor.name}</h2>
-                    <h3>{doctor.qualifications}</h3>
-                  </div>
-                  <div className="card-image">
-                    <figure className="image is-128x128">
-                      <img
-                        className="is-square"
-                        src="https://bulma.io/images/placeholder/128x128.png"
-                        src={doctor.url}
-                        alt={doctor.image}
-                        loading="lazy"
-                      />
-                    </figure>
-                  </div>
-                  <div className="card-bio has-background-link-light">
-                    <br />
-                    <h4>
-                      <u> Doctor Information:</u>
+    <div className="heading">
+      <h1>
+        <i class="fas fa-users">The team</i>
+      </h1>
+      <section className="section">
+        <div className="container">
+          <div className="columns is-multiline">
+            {doctors.map((doctor) => (
+              <div className="column is-one-third">
+                <div className="box">
+                  <div className="card" key={doctor.name}>
+                    <div className="card-header has-background-primary-light">
+                      <h2>{doctor.name}</h2>
+                      <h3>{doctor.qualifications}</h3>
+                    </div>
+                    <div className="card-image">
+                      <figure className="image is-By1">
+                        <img
+                          className="is-square"
+                          src="https://bulma.io/images/placeholder/128x128.png"
+                          src={doctor.url}
+                          alt={doctor.image}
+                          loading="lazy"
+                        />
+                      </figure>
+                    </div>
+                    <div className="card-bio has-background-link-light">
                       <br />
-                      {doctor.bio}
-                    </h4>
-                    <br />
-                    <h4>Appointments:{doctor.appointments}</h4>
-                    <button className="button is-success is-hovered is-default is-outlined">
-                      <span className="icon-text">
-                        <span className="icon is-small">
-                          <i class="fas fa-calendar-check"></i>
+                      <h4>
+                        <u> Doctor Information:</u>
+                        <br />
+                        {doctor.bio}
+                      </h4>
+                      <br />
+                      <h4>Appointments:{doctor.appointments}</h4>
+                      <button className="button is-success is-hovered is-default is-outlined">
+                        <span className="icon-text">
+                          <span className="icon is-small">
+                            <i class="fas fa-calendar-check"></i>
+                          </span>
+                          <span>
+                            <a href="./appointments">
+                              Click to book appointment.
+                            </a>
+                          </span>
                         </span>
-                        <span>
-                          <a href="./appointments">
-                            Click to book appointment.
-                          </a>
-                        </span>
-                      </span>
-                    </button>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

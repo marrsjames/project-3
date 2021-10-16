@@ -1,8 +1,10 @@
+
 import React, { useState, useEffect } from "react";
 import { getCovidData } from "../../api/CovidApi";
 import axios from "axios";
 
 const postcodeValue = document.querySelector(`input[name='postcode']`);
+
 
 const Covid = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,6 +56,7 @@ const Covid = () => {
         </div>
       </div>
     </>
+
   );
 };
 

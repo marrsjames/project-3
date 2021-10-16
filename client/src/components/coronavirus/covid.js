@@ -49,7 +49,7 @@ const Covid = () => {
               }}
             ></input>
             <input type="submit" value="🔍"></input>
-            <p>The number of cases today are: </p>
+            {/* <p>The number of cases today are: </p> */}
           </form>
         </div>
       </div>

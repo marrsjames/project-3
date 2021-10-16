@@ -13,6 +13,8 @@ import { getAllAppointments } from "../api/AppointmentsApi.js";
 import { isLoggedIn } from "../api/token.js";
 import Logout from "./auth/logout.js";
 import DoctorsCharacterCard from "../doctors/DoctorsCharacterCard";
+import EditAppointment from "../components/appointments/EditAppointment";
+import Footer from "./common/Footer.js";
 //import DoctorsCharacterCard2 from "../doctors/DoctorsCharacterCard2";
 
 const App = () => {
@@ -38,6 +40,15 @@ const App = () => {
       />
     );
   };
+
+  // const UpdateAppointment = () => {
+  //   return (
+  //     <EditAppointment
+  //       pushAppointment={pushAppointment}
+  //       appointmentsList={appointments}
+  //     />
+  //   );
+  // };
 
   // this here will help with navbar re: what's viewable when logged in.
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -69,6 +80,8 @@ const App = () => {
             <Logout callback={() => setIsAuthenticated(false)} />
           )}
         />
+        <Route path="/appointments/:id/edit" component={EditAppointment} />
+        <Footer />
       </Switch>
     </BrowserRouter>
   );

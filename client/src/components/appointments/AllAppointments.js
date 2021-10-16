@@ -88,7 +88,7 @@ const AllAppointments = ({ appointmentsList }) => {
   //   }
   // };
 
-  const handleDelete = async () => {
+  const handleDelete = async (id) => {
     // const apptToDelete = id;
     try {
       await deleteAppointment(id);
@@ -214,7 +214,10 @@ const AllAppointments = ({ appointmentsList }) => {
               Update Appointment
             </Link>
             <span> </span>
-            <button onClick={handleDelete} className="button is-danger">
+            <button
+              onClick={() => handleDelete(appointment._id)}
+              className="button is-danger"
+            >
               Cancel Appointment
             </button>
             <hr />

@@ -1,32 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import coronavirus from "../../images/coronavirus.jpg";
+
+import React, { useState, useEffect } from "react";
+import { getCovidData } from "../../api/CovidApi";
+import axios from "axios";
+
+const postcodeValue = document.querySelector(`input[name='postcode']`);
+
 
 const Covid = () => {
-  return (
-    <div className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
-      <Link to={`/coronavirus`}>
-        <div className="card">
-          <div className="card-header" />
-          <h4 className="card-header-title">Hello SEI 21</h4>
-        </div>
-        <div className="card-image">
-          <figure className="image is-1by1">
-            <img
-              src={coronavirus}
-              alt={coronavirus}
-              loading="lazy"
-              width="225"
-              height="225"
-            />
-          </figure>
-        </div>
+  const [searchQuery, setSearchQuery] = useState("");
 
-        <div className="card-content">
-          <h5>{} data to go here</h5>
+  const covidPostcode = {
+    method: "GET",
+    // url: `https://api.coronavirus.data.gov.uk/generic/code/postcode/${postcode}`,
+  };
+
+  axios
+    .request(covidPostcode)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const postcode = postcodeValue.value;
+  };
+
+  return (
+    <>
+      <div>
+        <h1 className="title">Coronavirus Information</h1>
+        {/* <h2>
+          Travel guidance - link to an API? <br /> Sections with information{" "}
+          <br />
+          Hyperlink to our services for coranvirus vaccinations/testing/blah
+        </h2> */}
+
+        <div class="search-bar">
+          <form onSubmit={handleSubmit}>
+            <span>Find out more coronavirus info in your area: </span>
+            <input
+              type="text"
+              placeholder="Enter your postcode"
+              name="postcode"
+              onChange={(event) => {
+                setSearchQuery(event.target.value);
+                console.log(event.target.value);
+              }}
+            ></input>
+            <input type="submit" value="🔍"></input>
+            {/* <p>The number of cases today are: </p> */}
+          </form>
         </div>
-      </Link>
-    </div>
+      </div>
+    </>
+
   );
 };
 

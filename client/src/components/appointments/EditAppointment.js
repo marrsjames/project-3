@@ -54,7 +54,7 @@ const EditAppointment = () => {
     event.preventDefault();
 
     try {
-      const res = await editAppointment(apptForm.formData, id);
+      const res = await editAppointment(id, apptForm.formData);
       pushAppointment(res.data);
       history.push("/appointments");
     } catch (error) {

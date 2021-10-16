@@ -26,13 +26,23 @@ export const getSingleAppointment = async (id) => {
 };
 
 export const editAppointment = async (id, formData) => {
+  console.log(`This is the id`, id);
   const options = {
     method: "PUT",
     data: formData,
     url: `/api/appointments/${id}/edit`,
   };
 
-  console.log();
+  console.log(`${id}`);
+
+  return axios(options);
+};
+
+export const deleteAppointment = async (id) => {
+  const options = {
+    method: "DELETE",
+    url: `/api/appointments/${id}`,
+  };
 
   return axios(options);
 };

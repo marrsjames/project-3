@@ -16,6 +16,11 @@ h1 {
 }
 
 /*--------------------- REGISTRATION FORM SPECIFIC -----------------------*/
+#sei-title {
+  font-size: 100px;
+}
+
+/*--------------------- REGISTRATION+LOGIN FORM SPECIFIC -----------------------*/
 
 #registration-form {
   border: 2px black solid;
@@ -35,18 +40,18 @@ h1 {
   height: 100px;
 }
 /*-------------------Styling for Doctors ----------------------------------------------*/
-h2{
+h2 {
   font-size: 1.5em;
   font-weight: bold;
   color: blue;
-} 
-h3{
+}
+h3 {
   font-size: 1.2em;
   font-weight: bold;
   color: black;
-} 
-h4{
-  font-size: 1.0em;
+}
+h4 {
+  font-size: 1em;
   font-weight: bold;
   color: black;
-} 
+}

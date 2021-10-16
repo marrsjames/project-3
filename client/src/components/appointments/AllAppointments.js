@@ -6,7 +6,10 @@ import { getAllServices } from "../../api/ServicesApi.js";
 import DatePicker from "react-datepicker";
 import Moment from "moment";
 import { useHistory } from "react-router";
-import { getSingleAppointment } from "../../api/AppointmentsApi.js";
+import {
+  getSingleAppointment,
+  deleteAppointment,
+} from "../../api/AppointmentsApi.js";
 
 const AllAppointments = ({ appointmentsList }) => {
   const { id } = useParams();
@@ -26,26 +29,28 @@ const AllAppointments = ({ appointmentsList }) => {
     getAllServices().then((services) => setServices(services));
   }, []);
 
-  const getApptApi = async () => {
-    try {
-      const res = await getSingleAppointment(id);
-      setOneAppointment({ appt: res.data });
-    } catch (err) {
-      console.error(`Error for finding ${id}`, err);
-    }
-  };
+  // const getApptApi = async () => {
+  //   try {
+  //     const res = await getSingleAppointment(id);
+  //     setOneAppointment({ appt: res.data });
+  //   } catch (err) {
+  //     console.error(`Error for finding ${id}`, err);
+  //   }
+  // };
 
-  useEffect(() => {
-    getApptApi();
-  }, []);
+  // useEffect(() => {
+  //   getApptApi();
+  // }, []);
 
-  console.log("state is", oneAppointment);
+  // console.log("state is", oneAppointment);
 
-  appointmentsList.sort(
-    (a, b) =>
+  appointmentsList.sort((a, b) => {
+    console.log({ a, b });
+    return (
       new Date(...a.date.split("/").reverse()) -
       new Date(...b.date.split("/").reverse())
-  );
+    );
+  });
 
   useEffect(() => {
     appointmentsList
@@ -82,6 +87,16 @@ const AllAppointments = ({ appointmentsList }) => {
   //     console.log("Error trying to edit appt", error);
   //   }
   // };
+
+  const handleDelete = async () => {
+    // const apptToDelete = id;
+    try {
+      await deleteAppointment(id);
+      history.push("/appointments");
+    } catch (error) {
+      console.error(`Failed to cancel appoint ${id}`, error);
+    }
+  };
 
   console.log(
     appointmentsList.map((appt) => new Date(appt.date).getFullYear())
@@ -185,7 +200,7 @@ const AllAppointments = ({ appointmentsList }) => {
         )
         .map((appointment) => (
           <div key={appointment._id}>
-            <h2>date and time: {appointment.date}</h2>
+            <h2>Date and Time: {appointment.date}</h2>
             <h2>Doctor: {appointment.doctor.map((doc) => doc.name)}</h2>
             <h2>Service: {appointment.service.map((ser) => ser.name)}</h2>
             <h2>Patient: {appointment.patient.map((pat) => pat.name)}</h2>
@@ -198,6 +213,10 @@ const AllAppointments = ({ appointmentsList }) => {
             >
               Update Appointment
             </Link>
+            <span> </span>
+            <button onClick={handleDelete} className="button is-danger">
+              Cancel Appointment
+            </button>
             <hr />
           </div>
         ))}

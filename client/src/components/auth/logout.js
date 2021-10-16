@@ -8,7 +8,7 @@ const Logout = ({ callback }) => {
   useEffect(() => {
     removeToken();
     callback();
-    history.goBack();
+    history.push("/");
   });
 
   return <h1>You have successfully logged out. Have a lovely day.</h1>;

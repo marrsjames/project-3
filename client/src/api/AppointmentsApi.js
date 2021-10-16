@@ -41,7 +41,7 @@ export const editAppointment = async (id, formData) => {
 export const deleteAppointment = async (id) => {
   const options = {
     method: "DELETE",
-    url: `/api/appointments/${id}`,
+    url: `/api/appointments/${id}/cancel`,
   };
 
   return axios(options);

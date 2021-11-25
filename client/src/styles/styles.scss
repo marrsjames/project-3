@@ -1,0 +1,82 @@
+@import "~bulma/bulma.sass";
+
+h1 {
+  font-size: 2em;
+  color: blue;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.tile {
+  flex-basis: 20%;
+  border: 5px solid black;
+  border-radius: 0.5rem;
+}
+
+/*--------------------- REGISTRATION FORM SPECIFIC -----------------------*/
+#sei-title {
+  font-size: 100px;
+}
+
+/*--------------------- REGISTRATION+LOGIN FORM SPECIFIC -----------------------*/
+
+#registration-form {
+  border: 2px black solid;
+  padding: 50px;
+}
+
+#login-form {
+  border: 2px black solid;
+  padding: 50px;
+}
+
+#submit-button {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+/*-------------------Styling for Doctors ----------------------------------------------*/
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: blue;
+}
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: black;
+}
+h4 {
+  font-size: 1em;
+  font-weight: bold;
+  color: black;
+} 
+.images img{
+  height:400px;
+  width:400px;
+  padding: 10px;
+  border: 2px solid black;
+}
+.text{
+  font-size:large;
+  color:blue;
+  font-family: fantasy;
+  padding:05px;
+}
+.googleMap{
+  width:300px;
+  height:400px;
+  border: 2px solid black;
+}
+.heading h1{
+  color:green;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  font-size: 8em;
+}
+
